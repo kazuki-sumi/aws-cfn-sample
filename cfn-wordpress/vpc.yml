@@ -25,8 +25,8 @@ Resources:
     Properties:
       CidrBlock: 10.0.0.0/24
       VpcId: !Ref WordPressVPC
-      AvailabilityZone: ap-northeast-1
-      # AvailabilityZone: !Select [ 0, !GetAZs ]
+      # AvailabilityZone: ap-northeast-1
+      AvailabilityZone: !Select [ 0, !GetAZs ]
       MapPublicIpOnLaunch: true
       Tags:
         - Key: Name
@@ -37,8 +37,8 @@ Resources:
     Properties:
       CidrBlock: 10.0.1.0/24
       VpcId: !Ref WordPressVPC
-      AvailabilityZone: ap-northeast-1
-      # AvailabilityZone: !Select [ 0, !GetAZs ]
+      # AvailabilityZone: ap-northeast-1
+      AvailabilityZone: !Select [ 0, !GetAZs ]
       MapPublicIpOnLaunch: true
       Tags:
         - Key: Name
@@ -49,8 +49,8 @@ Resources:
     Properties:
       CidrBlock: 10.0.2.0/24
       VpcId: !Ref WordPressVPC
-      AvailabilityZone: ap-northeast-1
-      # AvailabilityZone: !Select [ 0, !GetAZs ]
+      # AvailabilityZone: ap-northeast-1
+      AvailabilityZone: !Select [ 0, !GetAZs ]
       Tags:
         - Key: Name
           Value: PrivateSubnet1
@@ -60,8 +60,8 @@ Resources:
     Properties:
       CidrBlock: 10.0.3.0/24
       VpcId: !Ref WordPressVPC
-      AvailabilityZone: ap-northeast-1
-      # AvailabilityZone: !Select [ 0, !GetAZs ]
+      # AvailabilityZone: ap-northeast-1
+      AvailabilityZone: !Select [ 0, !GetAZs ]
       Tags:
         - Key: Name
           Value: PrivateSubnet2
