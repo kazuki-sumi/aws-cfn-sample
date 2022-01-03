@@ -16,6 +16,7 @@ Resources:
     Properties:
       ImageId: !Ref EC2AMI
       InstanceType: t2.micro
+      # TODO: ハードコーティングは本来はしない
       SubnetId: subnet-0d5561d70c4485c3e
       UserData: !Base64 |
         #! /bin/bash
@@ -31,7 +32,20 @@ Resources:
 
         systemctl enable httpd.service
         systemctl start httpd.service
+      SecurityGroupIds:
+        - !Ref WordPressEC2SG
 
+  WordPressEC2SG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: sg for web server
+      # TODO: ハードコーティングは本来はしない
+      VpcId: vpc-0a039b1e52820d39f
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          CidrIp: 10.0.0.0/16
+          FromPort: 80
+          ToPort: 80
 
 Outputs:
   EC2WebServer01:
