@@ -35,19 +35,19 @@ Resources:
   PublicSubnet2:
     Type: AWS::EC2::Subnet
     Properties:
-      CidrBlock: 10.0.1.0/24
+      CidrBlock: 10.0.2.0/24
       VpcId: !Ref WordPressVPC
       # AvailabilityZone: ap-northeast-1
-      AvailabilityZone: !Select [ 0, !GetAZs ]
+      AvailabilityZone: !Select [ 1, !GetAZs ]
       MapPublicIpOnLaunch: true
       Tags:
         - Key: Name
           Value: PublicSubnet2
 
-  PrivateSubnet2:
+  PrivateSubnet1:
     Type: AWS::EC2::Subnet
     Properties:
-      CidrBlock: 10.0.2.0/24
+      CidrBlock: 10.0.4.0/24
       VpcId: !Ref WordPressVPC
       # AvailabilityZone: ap-northeast-1
       AvailabilityZone: !Select [ 0, !GetAZs ]
@@ -55,13 +55,13 @@ Resources:
         - Key: Name
           Value: PrivateSubnet1
 
-  PrivateSubnet1:
+  PrivateSubnet2:
     Type: AWS::EC2::Subnet
     Properties:
-      CidrBlock: 10.0.3.0/24
+      CidrBlock: 10.0.5.0/24
       VpcId: !Ref WordPressVPC
       # AvailabilityZone: ap-northeast-1
-      AvailabilityZone: !Select [ 0, !GetAZs ]
+      AvailabilityZone: !Select [ 1, !GetAZs ]
       Tags:
         - Key: Name
           Value: PrivateSubnet2
