@@ -46,6 +46,10 @@ Resources:
           CidrIp: 10.0.0.0/16
           FromPort: 80
           ToPort: 80
+        - IpProtocol: tcp
+          CidrIp: 0.0.0.0/0
+          FromPort: 22
+          ToPort: 22
 
 Outputs:
   EC2WebServer01:
