@@ -15,6 +15,8 @@ Resources:
     Properties:
       Name: !Ref AWS::StackName
       Subnets:
+        # Fn::ImportValue: 別のスタックでエクスポートされた値を参照する時に使用する
+        #                  別のスタックのリソースまたは何かしらの値を参照したい場合にエクスポートされている名前、値を確認した上で使用する
         - Fn::ImportValue: !Sub ${VPCStack}-stack-PublicSubnet1
         - Fn::ImportValue: !Sub ${VPCStack}-stack-PublicSubnet2
       SecurityGroups:
