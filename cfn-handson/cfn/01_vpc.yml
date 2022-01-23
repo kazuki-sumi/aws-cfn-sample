@@ -57,14 +57,14 @@ Resources:
 
   CFnVPCIGW:
     Type: AWS::EC2::InternetGateway
-    Properties: 
+    Properties:
       Tags:
         - Key: Name
           Value: handson-cfn
 
   CFnVPCIGWAttach:
     Type: AWS::EC2::VPCGatewayAttachment
-    Properties: 
+    Properties:
       InternetGatewayId: !Ref CFnVPCIGW
       VpcId: !Ref CFnVPC
 

@@ -3,8 +3,11 @@ Description: WordPress template for EC2
 
 # 実行時にユーザ入力を求めるパラメータを定義(KeyPairの名前やDBのユーザ名など)
 Parameters:
+  # パラメータの名前。参照する際に使用する名前を定義する。
   VPCStack:
+    # パラメータの型を指定する。(ex: String, Numberなど)
     Type: String
+    # デフォルト値を設定する。実行時に値を変更しなければこのデフォルト値が使用される
     Default: wordpress-vpc
   EC2AMI:
     Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
