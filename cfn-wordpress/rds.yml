@@ -4,7 +4,7 @@ Description: WordPress template for RDS
 Parameters:
   VPCStack:
     Type: String
-    Default: wordpress-vpc
+    Default: wordpress-vpc-stack
   DBUser:
     Type: String
     Default: dbmaster
@@ -36,15 +36,15 @@ Resources:
     Properties:
       DBSubnetGroupDescription: DB Subnet Group for Private Subnet
       SubnetIds:
-        - Fn::ImportValue: !Sub ${VPCStack}-stack-PrivateSubnet1
-        - Fn::ImportValue: !Sub ${VPCStack}-stack-PrivateSubnet2
+        - Fn::ImportValue: !Sub ${VPCStack}-PrivateSubnet1
+        - Fn::ImportValue: !Sub ${VPCStack}-PrivateSubnet2
 
   DBSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: !Sub ${AWS::StackName}-MySQL
       VpcId:
-        Fn::ImportValue: !Sub ${VPCStack}-stack-VPCID
+        Fn::ImportValue: !Sub ${VPCStack}-VPCID
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 3306
