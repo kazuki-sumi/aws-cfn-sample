@@ -8,7 +8,7 @@ Parameters:
     # パラメータの型を指定する。(ex: String, Numberなど)
     Type: String
     # デフォルト値を設定する。実行時に値を変更しなければこのデフォルト値が使用される
-    Default: wordpress-vpc
+    Default: wordpress-vpc-stack
   EC2AMI:
     Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
     Default: /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2
@@ -19,8 +19,11 @@ Resources:
     Properties:
       ImageId: !Ref EC2AMI
       InstanceType: t2.micro
-      # TODO: ハードコーティングは本来はしない
-      SubnetId: subnet-0d5561d70c4485c3e
+      # SubnetId: subnet-0d5561d70c4485c3e
+      SubnetId:
+        # 組み込み関数のSub関数について: 同じスタックのリソースもしくはパラメータを参照したい場合に使用する
+        # 組み込み関数のFn::ImportValue関数について: 別のスタックのリソース(もしくは何かしらの値)を参照した場合、outputsにexportされている名前、値を確認した上で使用する
+        Fn::ImportValue: !Sub ${VPCStack}-PublicSubnet1
       UserData: !Base64 |
         #! /bin/bash
         yum update -y
@@ -42,8 +45,9 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: sg for web server
-      # TODO: ハードコーティングは本来はしない
-      VpcId: vpc-0a039b1e52820d39f
+      VpcId:
+        Fn::ImportValue: !Sub ${VPCStack}-VPCID
+      # VpcId: vpc-0a039b1e52820d39f
       SecurityGroupIngress:
         - IpProtocol: tcp
           CidrIp: 10.0.0.0/16
